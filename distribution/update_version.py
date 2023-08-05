@@ -50,8 +50,7 @@ version_file_path = project_root_path / "version.txt"
 touched_file_paths = [
     version_file_path,
     project_root_path / "meson.build",
-    project_root_path / "README.md",
-    project_root_path / "code.json",
+   project_root_path / "code.json",
 ]
 
 def log_update(path, version: Version):

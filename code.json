@@ -1,0 +1,38 @@
+[
+    {
+        "status": "Preliminary",
+        "languages": [
+            "Fortran95"
+        ],
+        "repositoryURL": "https://www.github.com/cnicol-gwlogic/usg-transport.git",
+        "disclaimerURL": "https://www.github.com/cnicol-gwlogic/usg-transport/blob/master/DISCLAIMER.md",
+        "tags": [
+            "MODFLOW",
+            "groundwater model"
+        ],
+        "vcs": "git",
+        "name": "usg-transport",
+        "downloadURL": "https://www.github.com/cnicol-gwlogic/usg-transport/archive/master.zip",
+        "contact": {
+            "name": "Sorab Panday",
+            "email": "a@a.a"
+        },
+        "laborHours": -1,
+        "version": "2.1.0",
+        "date": {
+            "metadataLastUpdated": "2023-08-06"
+        },
+        "organization": "GSI",
+        "permissions": {
+            "licenses": [
+                {
+                    "URL": "",
+                    "name": ""
+                }
+            ],
+            "usageType": "openSource"
+        },
+        "homepageURL": "",
+        "description": "MODFLOW USG-Transport"
+    }
+]
