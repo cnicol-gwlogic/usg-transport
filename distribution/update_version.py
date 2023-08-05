@@ -52,7 +52,7 @@ touched_file_paths = [
     project_root_path / "meson.build",
     project_root_path / "README.md",
     project_root_path / "code.json",
-
+]
 
 def log_update(path, version: Version):
     print(f"Updated {path} with version {version}")
