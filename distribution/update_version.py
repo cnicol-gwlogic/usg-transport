@@ -58,22 +58,6 @@ def log_update(path, version: Version):
     print(f"Updated {path} with version {version}")
 
 
-def update_version_txt_and_py(version: Version, timestamp: datetime):
-    with open(version_file_path, "w") as f:
-        f.write(str(version))
-    log_update(version_file_path, version)
-
-    py_path = project_root_path / "doc" / version_file_path.name.replace(".txt", ".py")
-    with open(py_path, "w") as f:
-        f.write(
-            f"# {project_name} version file automatically "
-            + f"created using...{os.path.basename(__file__)}\n"
-        )
-        f.write("# created on..." + f"{timestamp.strftime('%B %d, %Y %H:%M:%S')}\n")
-        f.write(f'__version__ = "{version}"\n')
-    log_update(py_path, version)
-
-
 def update_meson_build(version: Version):
     path = project_root_path / "meson.build"
     lines = open(path, "r").read().splitlines()
@@ -126,12 +110,7 @@ def update_version(
         )
 
         with lock:
-            update_version_txt_and_py(version, timestamp)
             update_meson_build(version)
-            update_version_tex(version, timestamp)
-            update_version_f90(version, timestamp, approved, developmode)
-            update_readme_and_disclaimer(version, approved)
-            update_citation_cff(version, timestamp)
             update_codejson(version, timestamp, approved)
     finally:
         lock_path.unlink(missing_ok=True)
