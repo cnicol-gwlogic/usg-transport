@@ -275,3 +275,74 @@ jobs:
             cmd="$cmd --full"
           fi
           eval "$cmd"
+
+      - name: Zip distribution
+        if: runner.os != 'Windows'
+        run: |
+          distname="${{ needs.build.outputs.distname }}_${{ matrix.ostag }}"
+          if [[ "${{ inputs.full }}" == "true" ]]; then
+            zip -r $distname.zip \
+              $distname/bin \
+              $distname/src \
+              $distname/make \
+              $distname/msvs \
+              $distname/code.json \
+              $distname/meson.build \
+              -x '*.DS_Store' \
+              -x '*pymake*' \
+              -x '*obj_temp*' \
+              -x '*mod_temp*'
+          else
+            zip -r $distname.zip \
+              $distname/bin/* \
+              $distname/code.json \
+              -x '*.DS_Store' \
+              -x '*pymake*' \
+              -x '*obj_temp*' \
+              -x '*mod_temp*'
+          fi
+
+      - name: Zip distribution (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          distname="${{ needs.build.outputs.distname }}_${{ matrix.ostag }}"
+          if [[ "${{ inputs.full }}" == "true" ]]; then
+            7z a -tzip $distname.zip \
+              $distname/bin \
+              $distname/src \
+              $distname/make \
+              $distname/msvs \
+              $distname/code.json \
+              $distname/meson.build \
+              -xr!pymake \
+              -xr!obj_temp \
+              -xr!mod_temp
+          else
+            7z a -tzip $distname.zip \
+              $distname/bin/* \
+              $distname/code.json \
+              -xr!pymake \
+              -xr!obj_temp \
+              -xr!mod_temp
+          fi
+
+      # validate only after zipping distribution to avoid accidentally changing any files
+      - name: Validate distribution
+        run: |
+          cmd="pytest -v -s usg-transport/distribution/check_dist.py --path ${{ needs.build.outputs.distname }}_${{ matrix.ostag }}"
+          if [[ "${{ inputs.approve }}" == "true" ]]; then
+            cmd="$cmd --approved"
+          fi
+          if [[ "${{ inputs.developmode }}" == "false" ]]; then
+             cmd="$cmd --releasemode"
+          fi
+          if [[ "${{ inputs.full }}" == "true" ]]; then
+            cmd="$cmd --full"
+          fi
+          eval "$cmd"
+
+      - name: Upload distribution
+        uses: actions/upload-artifact@v3
+        with:
+          name: "${{ needs.build.outputs.distname }}_${{ matrix.ostag }}"
+          path: "${{ needs.build.outputs.distname }}_${{ matrix.ostag }}.zip"
