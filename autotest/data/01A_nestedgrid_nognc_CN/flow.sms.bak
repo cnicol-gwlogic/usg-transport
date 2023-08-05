@@ -1,0 +1,10 @@
+# HCLOSE       HICLOSE    MXITER     ITER1        IPRSMS NONLINMETH   LINMETH							
+ 1.0e-8        1.0e-8      500        300              2       2            2        SOLVEACTIVE 
+# THETA        AKAPPA     GAMMA      AMOMENTUM    NUMTRACK     BTOL      BREDUC       RESLIM							 
+ 0.7            0.07       0.3          0.1        200          1.1       0.3      1.0
+# CG_or_BCGS   IPC        ISCL       IORD         RCLOSEPCGU   RELAX							
+ BCGS          2          0          0            0.00001        0.97
+
+# ORIGINAL TEST CASE SETTINGS:
+     1e-08     1e-08       100       100         1         0         1
+         2         0         0         7         0         0         0     0.001
