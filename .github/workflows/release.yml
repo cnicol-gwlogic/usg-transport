@@ -117,6 +117,7 @@ jobs:
         if: runner.os != 'Windows'
         working-directory: usg-transport
         run: |
+          cp meson.build ./src/meson.build
           meson setup builddir -Ddebug=false --prefix=$(pwd) --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
@@ -126,6 +127,7 @@ jobs:
         working-directory: usg-transport
         shell: pwsh
         run: |
+          Copy-Item "meson.build" -Destination "src"
           meson setup builddir -Ddebug=false --prefix=$(pwd) --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
