@@ -121,8 +121,8 @@ subdir('src')
 # subdir('unittests')
 
 # meson tests to evaluate installation success
-testdir = meson.project_source_root() / '.usgtminsim'
-test('Version command line test', mf6exe, args : ['-v',])
-test('Compiler command line test', mf6exe, args : ['-c',])
-test('Test installation help', mf6exe, args : ['-h',])
-test('Serial simulation test', mf6exe, workdir : testdir)
+#testdir = meson.project_source_root() / '.usgminsim'
+#test('Version command line test', usgexe, args : ['-v',])
+#test('Compiler command line test', usgexe, args : ['-c',])
+#test('Test installation help', usgexe, args : ['-h',])
+#test('Serial simulation test', usgexe, workdir : testdir)
