@@ -286,7 +286,6 @@ jobs:
               $distname/bin \
               $distname/src \
               $distname/make \
-              $distname/msvs \
               $distname/code.json \
               $distname/meson.build \
               -x '*.DS_Store' \
@@ -312,7 +311,6 @@ jobs:
               $distname/bin \
               $distname/src \
               $distname/make \
-              $distname/msvs \
               $distname/code.json \
               $distname/meson.build \
               -xr!pymake \
