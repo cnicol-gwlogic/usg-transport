@@ -15,7 +15,7 @@ from modflow_devtools.download import download_and_unzip, get_release
 from modflow_devtools.markers import requires_exe
 from modflow_devtools.misc import get_model_paths
 
-from build_makefiles import (build_mf6_makefile)
+from build_makefiles import (build_usg_makefile)
 from utils import get_project_root_path, run_command
 
 # default paths
@@ -109,8 +109,8 @@ def test_build_programs_meson(tmp_path):
 def build_makefiles(output_path: PathLike):
     output_path = Path(output_path).expanduser().absolute()
 
-    # create and copy mf6 makefile
-    build_mf6_makefile()
+    # create and copy usg makefile
+    build_usg_makefile()
     (output_path / "make").mkdir(parents=True, exist_ok=True)
     shutil.copyfile(
         _project_root_path / "make" / "makefile", output_path / "make" / "makefile"
@@ -179,7 +179,7 @@ def test_build_distribution(tmp_path, full):
         # check binaries and libs
         system = platform.system()
         ext = ".exe" if system == "Windows" else ""
-        for exe in ["mf6"]:
+        for exe in ["usg-transport"]:
             assert (output_path / f"{exe}{ext}").is_file()
 
 
