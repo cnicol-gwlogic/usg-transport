@@ -270,7 +270,8 @@ jobs:
         run: |
           # build distribution
           distname="${{ needs.build.outputs.distname }}_${{ matrix.ostag }}"
-          cmd="python usg-transport/distribution/build_dist.py -o $distname -e usg-transport-examples"
+          cmd="python usg-transport/distribution/build_dist.py -o $distname"
+          # -e usg-transport-examples
           if [[ "${{ inputs.full }}" == "true" ]]; then
             cmd="$cmd --full"
           fi
