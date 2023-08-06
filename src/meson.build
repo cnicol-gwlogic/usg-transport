@@ -36,7 +36,6 @@ modflow_sources = files(
     'gwt2mdtu1.for',
     'lak_gag_sfr_modules.f',
     'mfusg.f',
-    'openspec.inc',
     'parutl7.f',
     'pcgu7.f',
     'ReadCBC.f',
