@@ -25,7 +25,10 @@ pmobj.makefile = False
 
 pmobj.build()
 
+target = os.path.join("..", "bin", "usg-transport.exe")
+if os.path.isfile(target):
+    os.remove(target)
 os.rename(
     os.path.join("..", "bin", "mfusg.exe"),
-    os.path.join("..", "bin", "usg-transport.exe")
+    target
     )

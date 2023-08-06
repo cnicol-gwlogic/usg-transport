@@ -2,7 +2,7 @@
     {
         "status": "Preliminary",
         "languages": [
-            "Fortran95"
+            "Fortran90"
         ],
         "repositoryURL": "https://www.github.com/cnicol-gwlogic/usg-transport.git",
         "disclaimerURL": "https://www.github.com/cnicol-gwlogic/usg-transport/blob/master/DISCLAIMER.md",
