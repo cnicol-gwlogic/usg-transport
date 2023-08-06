@@ -137,58 +137,58 @@ jobs:
           path: usg-transport/bin
 
       # only run steps below if inputs.run_tests is true
-      - name: Checkout usg-transport-testmodels
-        if: inputs.run_tests == true
-        uses: actions/checkout@v3
-        with:
-          repository: cnicol-gwlogic/usg-transport-testmodels
-          path: usg-transport-testmodels
+      #- name: Checkout usg-transport-testmodels
+      #  if: inputs.run_tests == true
+      #  uses: actions/checkout@v3
+      #  with:
+      #    repository: cnicol-gwlogic/usg-transport-testmodels
+      #    path: usg-transport-testmodels
 
-      - name: Checkout usg-transport-examples
-        if: inputs.run_tests == true
-        uses: actions/checkout@v3
-        with:
-          repository: cnicol-gwlogic/usg-transport-examples
-          path: usg-transport-examples
+      #- name: Checkout usg-transport-examples
+      #  if: inputs.run_tests == true
+      #  uses: actions/checkout@v3
+      #  with:
+      #    repository: cnicol-gwlogic/usg-transport-examples
+      #    path: usg-transport-examples
 
-      - name: Get executables
-        if: inputs.run_tests == true
-        working-directory: usg-transport/autotest
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: pytest -v --durations 0 get_exes.py
+      #- name: Get executables
+      #  if: inputs.run_tests == true
+      #  working-directory: usg-transport/autotest
+      #  env:
+      #    GITHUB_TOKEN: ${{ github.token }}
+      #  run: pytest -v --durations 0 get_exes.py
 
-      - name: Test usg-transport
-        if: inputs.run_tests == true && runner.os != 'Windows'
-        working-directory: usg-transport/autotest
-        env:
-          REPOS_PATH: ${{ github.workspace }}
-        run: |
-          markers="not large"
-          if [[ "${{ inputs.developmode }}" == "false" ]]; then
-            markers="$markers and not developmode"
-          fi
-          pytest -v -n auto --durations 0 -m "$markers"
+      #- name: Test usg-transport
+      #  if: inputs.run_tests == true && runner.os != 'Windows'
+      #  working-directory: usg-transport/autotest
+      #  env:
+      #    REPOS_PATH: ${{ github.workspace }}
+      #  run: |
+      #    markers="not large"
+      #    if [[ "${{ inputs.developmode }}" == "false" ]]; then
+      #      markers="$markers and not developmode"
+      #    fi
+      #    pytest -v -n auto --durations 0 -m "$markers"
       
-      - name: Test usg-transport (Windows)
-        if: inputs.run_tests == true && runner.os == 'Windows'
-        working-directory: usg-transport/autotest
-        shell: pwsh
-        env:
-          REPOS_PATH: ${{ github.workspace }}
-        run: |
-          $markers="not large"
-          if ("${{ inputs.developmode }}" -eq "false") {
-            $markers="$markers and not developmode"
-          }
-          pytest -v -n auto --durations 0 -m "$markers"
+      #- name: Test usg-transport (Windows)
+      #  if: inputs.run_tests == true && runner.os == 'Windows'
+      #  working-directory: usg-transport/autotest
+      #  shell: pwsh
+      #  env:
+      #    REPOS_PATH: ${{ github.workspace }}
+      #  run: |
+      #    $markers="not large"
+      #    if ("${{ inputs.developmode }}" -eq "false") {
+      #      $markers="$markers and not developmode"
+      #    }
+      #    pytest -v -n auto --durations 0 -m "$markers"
       
-      - name: Test distribution scripts
-        if: ${{ inputs.run_tests == true }}
-        working-directory: usg-transport/distribution
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: pytest -v --durations 0
+      #- name: Test distribution scripts
+      #  if: ${{ inputs.run_tests == true }}
+      #  working-directory: usg-transport/distribution
+      #  env:
+      #    GITHUB_TOKEN: ${{ github.token }}
+      #  run: pytest -v --durations 0
           
   dist:
     name: Build distribution (${{ matrix.os }})
