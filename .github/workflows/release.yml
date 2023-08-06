@@ -32,7 +32,7 @@ on:
         description: Run tests after building binaries.'
         required: false
         type: boolean
-        default: true
+        default: false
       version:
         description: 'Version number to use for release.'
         required: true
