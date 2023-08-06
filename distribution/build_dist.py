@@ -15,13 +15,12 @@ from modflow_devtools.download import download_and_unzip, get_release
 from modflow_devtools.markers import requires_exe
 from modflow_devtools.misc import get_model_paths
 
-from build_docs import build_documentation
 from build_makefiles import (build_mf6_makefile)
 from utils import get_project_root_path, run_command
 
 # default paths
 _project_root_path = get_project_root_path()
-_examples_repo_path = _project_root_path.parent / "usg-transport-examples"
+#_examples_repo_path = _project_root_path.parent / "usg-transport-examples"
 _build_path = _project_root_path / "builddir"
 
 # OS-specific extensions
@@ -134,15 +133,15 @@ def test_build_makefiles(tmp_path):
 def build_distribution(
     build_path: PathLike,
     output_path: PathLike,
-    examples_repo_path: PathLike,
     full: bool = False,
     overwrite: bool = False,
 ):
+    #examples_repo_path: PathLike,
     print(f"Building {'full' if full else 'minimal'} distribution")
 
     build_path = Path(build_path).expanduser().absolute()
     output_path = Path(output_path).expanduser().absolute()
-    examples_repo_path = Path(examples_repo_path).expanduser().absolute()
+    #examples_repo_path = Path(examples_repo_path).expanduser().absolute()
 
     # binaries
     build_programs_meson(
@@ -169,10 +168,9 @@ def test_build_distribution(tmp_path, full):
     build_distribution(
         build_path=tmp_path / "builddir",
         output_path=output_path,
-        examples_repo_path=_examples_repo_path,
         full=full,
         overwrite=True,
-    )
+    ) #         examples_repo_path=_examples_repo_path,
 
     if full:
         # todo
@@ -211,13 +209,13 @@ if __name__ == "__main__":
         default=str(_project_root_path / "distribution"),
         help="Path to create distribution artifacts",
     )
-    parser.add_argument(
+    """    parser.add_argument(
         "-e",
         "--examples-repo-path",
         required=False,
         default=str(_examples_repo_path),
         help="Path to directory containing usg-transport example models",
-    )
+    )"""
     parser.add_argument(
         "--full",
         required=False,
@@ -236,20 +234,19 @@ if __name__ == "__main__":
     args = parser.parse_args()
     build_path = Path(args.build_path)
     out_path = Path(args.output_path)
-    examples_repo_path = (
+    """    examples_repo_path = (
         Path(args.examples_repo_path)
         if args.examples_repo_path
         else _examples_repo_path
     )
     assert (
         examples_repo_path.is_dir()
-    ), f"Examples repo not found at path: {examples_repo_path}"
+    ), f"Examples repo not found at path: {examples_repo_path}"""
     out_path.mkdir(parents=True, exist_ok=True)
 
     build_distribution(
         build_path=build_path,
         output_path=out_path,
-        examples_repo_path=examples_repo_path,
         full=args.full,
         overwrite=args.force,
-    )
+    ) # examples_repo_path=examples_repo_path,
