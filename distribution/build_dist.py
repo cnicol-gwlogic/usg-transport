@@ -42,14 +42,14 @@ def copy_sources(output_path: PathLike):
     output_path.mkdir(exist_ok=True)
 
     # Copy Visual Studio sln and project files
-    print("Copying msvs files to output directory")
+    """print("Copying msvs files to output directory")
     (output_path / "msvs").mkdir(exist_ok=True)
     source_msvs_path = _project_root_path / "msvs"
     for d in [
         str(source_msvs_path / "usg-transport.sln"),
         str(source_msvs_path / "usg-transport.vfproj"),
     ]:
-        shutil.copy(d, output_path / "msvs")
+        shutil.copy(d, output_path / "msvs")"""
 
     ignored = shutil.ignore_patterns(".DS_Store")
 
@@ -68,10 +68,10 @@ def test_copy_sources(tmp_path):
     copy_sources(tmp_path)
 
     assert (tmp_path / "src").is_dir()
-    assert (tmp_path / "msvs").is_dir()
+    # assert (tmp_path / "msvs").is_dir()
 
     assert (tmp_path / "src" / "meson.build").is_file()
-    assert (tmp_path / "msvs" / "usg-transport.sln").is_file()
+    # assert (tmp_path / "msvs" / "usg-transport.sln").is_file()
 
 
 def build_programs_meson(
