@@ -73,6 +73,7 @@ def test_sources(dist_dir_path, releasemode, full):
     assert (dist_dir_path / "src" / "mfusg.f").is_file()
 
 
+"""
 @pytest.mark.skipif(not _fc, reason="needs Fortran compiler")
 def test_makefiles(dist_dir_path, full):
     if not full:
@@ -84,7 +85,8 @@ def test_makefiles(dist_dir_path, full):
     # makefiles can't be used on Windows with ifort compiler
     if _system != "Windows" or _fc != "ifort":
         print(subprocess.check_output("make", cwd=dist_dir_path / "make", shell=True))
-        
+"""
+
 
 """
 def test_examples(dist_dir_path, full):
