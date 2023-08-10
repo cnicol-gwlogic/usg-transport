@@ -212,7 +212,7 @@ jobs:
       
           Visit the GSI USG-Transport website for information on USG-Transport: https://www.gsienv.com/product/modflow-usg
           '
-          gh release create "$ver" ../usg-transport/usg-transport.zip --target master --title "$title" --notes "$notes" --draft --latest
+          gh release create "$ver" ../usg-transport*/usg-transport*.zip --target master --title "$title" --notes "$notes" --draft --latest
 
   reset:
     name: Draft reset PR
@@ -281,4 +281,4 @@ jobs:
           body='
           Reinitialize the `develop` branch following a successful release.
           '
-          gh pr create -B "develop" -H "$reset_branch" --title "Reinitialize develop branch" --draft --body "$body
+          gh pr create -B "develop" -H "$reset_branch" --title "Reinitialize develop branch" --draft --body "$body"
