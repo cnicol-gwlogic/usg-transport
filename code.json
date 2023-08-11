@@ -18,9 +18,9 @@
             "email": "a@a.a"
         },
         "laborHours": -1,
-        "version": "2.1.0b0",
+        "version": "2.1.0a0",
         "date": {
-            "metadataLastUpdated": "2023-08-06"
+            "metadataLastUpdated": "2023-08-11"
         },
         "organization": "GSI",
         "permissions": {
