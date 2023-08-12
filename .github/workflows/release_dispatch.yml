@@ -206,9 +206,7 @@ jobs:
           ver=$(python distribution/update_version.py -g)
           title="USG-Transport $ver"
           notes='
-          USG-Transport $ver release for Flopy CI.
-      
-          Visit the GSI USG-Transport website for information on USG-Transport: https://www.gsienv.com/product/modflow-usg
+          USG-Transport '$ver' release for Flopy CI.
           '
           gh release create "$ver" ../usg-transport*/usg-transport*.zip --target master --title "$title" --notes "$notes" --draft --latest
 
