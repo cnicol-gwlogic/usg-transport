@@ -46,7 +46,7 @@ on:
 jobs:
   set_options:
     name: Set release options
-    if: github.ref_name != 'master'
+    if: ${{github.ref_name != 'master' && github.event_name != 'release'}}
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -206,11 +206,7 @@ jobs:
           ver=$(python distribution/update_version.py -g)
           title="USG-Transport $ver"
           notes='
-          This is the approved USG-Transport '$ver' release.
-      
-          *Insert citation here*
-      
-          Visit the GSI USG-Transport website for information on USG-Transport: https://www.gsienv.com/product/modflow-usg
+          USG-Transport '$ver' release for Flopy CI.
           '
           gh release create "$ver" ../usg-transport*/usg-transport*.zip --target master --title "$title" --notes "$notes" --draft --latest
 
@@ -218,7 +214,7 @@ jobs:
     name: Draft reset PR
     # runs only after GitHub release post is published (promoted from draft to public)
     # to bring release commits from master back into develop and reset IDEVELOPMODE=1.
-    if: github.event_name == 'release' && (inputs.reset == 'true' || inputs.reset == '')
+    if: ${{github.event_name == 'release' && (inputs.reset == 'true' || inputs.reset == '')}}
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -278,7 +274,5 @@ jobs:
           git push -u origin $reset_branch
 
           # create PR into develop
-          body='
-          Reinitialize the `develop` branch following a successful release.
-          '
+          body="Reinitialize the `develop` branch following a successful release."
           gh pr create -B "develop" -H "$reset_branch" --title "Reinitialize develop branch" --draft --body "$body"
