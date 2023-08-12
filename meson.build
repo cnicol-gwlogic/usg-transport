@@ -1,7 +1,7 @@
 project(
   'MODFLOW USG-Transport',
   'fortran',
-  version: '2.1.0b0',
+  version: '2.1.0a0',
   license: 'CC0',
   meson_version: '>= 1.1.0',
   default_options : [
