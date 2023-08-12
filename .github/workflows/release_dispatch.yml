@@ -46,7 +46,7 @@ on:
 jobs:
   set_options:
     name: Set release options
-    if: github.ref_name != 'master' && github.event_name != 'release'
+    if: ${{github.ref_name != 'master' && github.event_name != 'release'}}
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -214,7 +214,7 @@ jobs:
     name: Draft reset PR
     # runs only after GitHub release post is published (promoted from draft to public)
     # to bring release commits from master back into develop and reset IDEVELOPMODE=1.
-    if: github.event_name == 'release' && (inputs.reset == 'true' || inputs.reset == '')
+    if: ${{github.event_name == 'release' && (inputs.reset == 'true' || inputs.reset == '')}}
     runs-on: ubuntu-22.04
     defaults:
       run:
