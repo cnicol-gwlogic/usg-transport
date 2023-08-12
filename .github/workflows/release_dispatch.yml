@@ -46,7 +46,7 @@ on:
 jobs:
   set_options:
     name: Set release options
-    if: github.ref_name != 'master' && github.event_name != 'release'
+    if: ${{github.ref_name != 'master' && github.event_name != 'release'}}
     runs-on: ubuntu-22.04
     defaults:
       run:
