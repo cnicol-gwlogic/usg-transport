@@ -1,6 +1,6 @@
 [
     {
-        "status": "Release",
+        "status": "Preliminary",
         "languages": [
             "Fortran90"
         ],
@@ -20,7 +20,7 @@
         "laborHours": -1,
         "version": "2.1.0",
         "date": {
-            "metadataLastUpdated": "2023-08-12"
+            "metadataLastUpdated": "2023-08-14"
         },
         "organization": "GSI",
         "permissions": {
